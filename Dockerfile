@@ -1,5 +1,5 @@
-# Usa una imagen base con el JDK de Java 17
-FROM maven:3.8.6-openjdk-17-slim
+# Usa una imagen base con Maven y JDK de Java 17
+FROM maven:3.9.6-eclipse-temurin-17
 
 # Define el directorio de trabajo dentro del contenedor
 WORKDIR /app
