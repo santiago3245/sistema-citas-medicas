@@ -9,7 +9,7 @@ COPY pom.xml .
 COPY src ./src
 
 # Construye la aplicación con Maven
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 # Expone el puerto en el que la aplicación se ejecutará
 EXPOSE 8080
