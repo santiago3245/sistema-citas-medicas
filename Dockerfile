@@ -1,5 +1,5 @@
 # Usa una imagen base con el JDK de Java 17
-FROM openjdk:17-jdk-slim
+FROM maven:3.8.6-openjdk-17-slim
 
 # Define el directorio de trabajo dentro del contenedor
 WORKDIR /app
