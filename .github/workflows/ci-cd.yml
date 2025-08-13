@@ -11,6 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     name: 🔨 Integración Continua
 
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: citas_db
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: 123
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4
@@ -31,17 +47,6 @@ jobs:
       - name: 🧪 Run Tests (JUnit)
         run: mvn clean test
 
-      - name: 🏗️ Build JAR (Entrega Continua)
-        run: mvn package -DskipTests
-
-      - name: 📤 Upload JAR artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: citas-api-jar
-          path: target/*.jar
-
-      - name: ✅ CI completado
-        run: echo "✅ Integración y Entrega Continua completadas exitosamente"
 
   deploy:
     needs: ci
